@@ -56,7 +56,7 @@ describe('USER SIGN UP', () => {
             })
             .catch(err => done(err));
         })
-        it.only('delete user',async () => {
+        it('delete user',async () => {
             const res = await request
             .post('/users/signup')
             .send(user)
@@ -86,25 +86,6 @@ describe('USER SIGN UP', () => {
                 expect(res.statusCode).toBe(401);
             })
         });
-        // it('login user v3', (done) => {
-        //     request
-        //     .post('/users/signup')
-        //     .send(user2)
-        //     .expect(201)
-
-        //     request
-        //     .post('/users/login')
-        //     .send({email:user2.email,password:user2.password})
-        //     .end((err,res)=>{
-        //         if(err) return done(err)
-        //         expect(res.status).toBe(200)
-        //         expect(res.statusCode).toBe(200)
-        //         expect(res.header['content-type']).toBe('application/json; charset=utf-8')
-        //         expect(typeof res).toBe('object')
-        //         console.log(res.body,777777777777777777777777777777777777777)
-        //         done()
-        //     })
-        // });
     });
     describe('NEGATIVE', () => {
         it('login user with invalid credentials',async () => {
