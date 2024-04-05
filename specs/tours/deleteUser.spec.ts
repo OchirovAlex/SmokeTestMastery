@@ -47,5 +47,25 @@ describe("DELETE USER", () => {
             expect(res.body.message).toEqual('Incorrect email or password');
         })
     });
+    it('user cannot login with invalid credentials v2',async () => {
+      const res = await login({
+          email: user.email,
+          password: user.password
+      })
+      expect(res.body.statusCode).toBe(200)
+      expect(res.body.message).toEqual('Incorrect email or password')
+    });
+    it('user cannot login with invalid credentials v3', (done)=>{
+      login({
+        email: user.email,
+        password: user.password
+      }).then(response=>{
+        response.end((err,res)=>{
+          if(err) return done(err)
+          expect(response.body.message).toEqual('Incorrect email or password')
+          done()
+        })
+      })
+    })
   });
 });
