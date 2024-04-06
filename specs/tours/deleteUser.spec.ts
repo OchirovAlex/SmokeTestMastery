@@ -24,7 +24,7 @@ describe("DELETE USER", () => {
       });
     });
   });
-  describe.only('NEGATIVE', () => {
+  describe('NEGATIVE', () => {
     let cookie:[x:string]
     beforeEach(async() => {
         await signUp(user).then((res) => {
