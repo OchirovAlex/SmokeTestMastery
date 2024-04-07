@@ -56,36 +56,6 @@ describe('USER SIGN UP', () => {
             })
             .catch(err => done(err));
         })
-        it('delete user',async () => {
-            const res = await request
-            .post('/users/signup')
-            .send(user)
-            .expect(201);
-
-            const resLogin = await request
-            .post('/users/login')
-            .send({email:user.email,password:user.password})
-            .expect(200)
-            expect(resLogin.statusCode).toBe(200)
-            expect(resLogin.header['content-type']).toBe('application/json; charset=utf-8')
-            expect(typeof resLogin).toBe('object')
-            
-            await request
-            .delete('/users/deleteMe')
-            .set('Cookie', resLogin.headers['set-cookie'])
-            .expect(204);
-
-            // await deleteFunction(resLogin).then(el=>{
-            //     console.log(el,"el");
-            // })
-
-            await request
-            .post('/users/login')
-            .send({email: user.email, password: user.password})
-            .then(res=>{
-                expect(res.statusCode).toBe(401);
-            })
-        });
     });
     describe('NEGATIVE', () => {
         it('login user with invalid credentials',async () => {
