@@ -11,7 +11,8 @@
     "todos": "npx jest todos.spec.ts",
     "userSU": "npx jest userSignUp.spec.ts",
     "login": "npx jest login.spec.ts",
-    "deleteUser": "npx jest deleteUser.spec.ts"
+    "deleteUser": "npx jest deleteUser.spec.ts",
+    "createTour": "npx jest createTour.spec.ts"
   },
   "keywords": [],
   "author": "",
