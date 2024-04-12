@@ -1,7 +1,7 @@
 import * as supertest from "supertest";
-import { user, user1, user2, user3, user4, user5 } from "../../data/user";
+import { user, user1, user2, user3, user4, user5 } from "../../../data/user";
 const request = supertest("localhost:8001/api/v1");
-import { deleteFunction, login, signUp } from "../../data/helpers";
+import { deleteFunction, login, signUp } from "../../../data/helpers";
 
 describe("DELETE USER", () => {
   let cookie: [x: string];
