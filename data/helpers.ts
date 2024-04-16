@@ -30,41 +30,41 @@ const randomTourName = (charCount: number): string => {
   return limitedText;
 };
 
-user.aggregate([{ $sample: { size: 1 } }])
-  .then(users => {
-    const randomUser = users[0];
+// user.aggregate([{ $sample: { size: 1 } }])
+//   .then(users => {
+//     const randomUser = users[0];
     
-    const guide = new Guide({
-      guides: [randomUser._id]
-    });
+//     const guide = new Guide({
+//       guides: [randomUser._id]
+//     });
     
-    return guide.save();
-  })
+//     return guide.save();
+//   })
 
-export const randomTour:Tour = {
-  name: randomTourName(40),
-  duration: faker.number.int({min:10, max:40}),
-  description: faker.lorem.words(5),
-  maxGroupSize: faker.number.int({min: 10, max: 30}),
-  summary: faker.lorem.words(10),
-  difficulty: ,
-  price: faker.number.int(),
-  rating: faker.number.float({min:1.0, max:5.0}),
-  imageCover: `tour-${faker.number.int({min:1,max:9})}-cover.jpg`,
-  ratingsAverage: faker.number.float({min:1.0, max:5.0}),
-  guides: object,
-  startDates: [x:string],
-  location: {
-    latitude: number,
-    longitude: number,
-    description: string,
-    address: string,
-  },
-  startLocation: {
-    type: string,
-    coordinates: number,
-  }
-}
+// export const randomTour:Tour = {
+//   name: randomTourName(40),
+//   duration: faker.number.int({min:10, max:40}),
+//   description: faker.lorem.words(5),
+//   maxGroupSize: faker.number.int({min: 10, max: 30}),
+//   summary: faker.lorem.words(10),
+//   difficulty: ,
+//   price: faker.number.int(),
+//   rating: faker.number.float({min:1.0, max:5.0}),
+//   imageCover: `tour-${faker.number.int({min:1,max:9})}-cover.jpg`,
+//   ratingsAverage: faker.number.float({min:1.0, max:5.0}),
+//   guides: object,
+//   startDates: [x:string],
+//   location: {
+//     latitude: number,
+//     longitude: number,
+//     description: string,
+//     address: string,
+//   },
+//   startLocation: {
+//     type: string,
+//     coordinates: number,
+//   }
+// }
 
 
 export function upload(files: string[]): Promise<any> {
