@@ -32,6 +32,6 @@ export interface Tour{
       },
       startLocation: {
           type: string,
-          coordinates: number,
+          coordinates: [x:number, y:number],
       }
 }

@@ -4,6 +4,8 @@ import { user, user1, user2, user3, user4, user5 } from "./user";
 import {Tour} from "./interface";
 import { faker } from '@faker-js/faker';
 const requestSdet = supertest("https://practice-react.sdetunicorns.com/api/test")
+const mongoose = require('mongoose');
+
 
 export async function deleteFunction(cookie: [x: string]): Promise<any> {
   return await request.delete("/users/deleteMe").set("Cookie", cookie);
@@ -30,41 +32,67 @@ const randomTourName = (charCount: number): string => {
   return limitedText;
 };
 
-// user.aggregate([{ $sample: { size: 1 } }])
-//   .then(users => {
-//     const randomUser = users[0];
-    
-//     const guide = new Guide({
-//       guides: [randomUser._id]
-//     });
-    
-//     return guide.save();
-//   })
 
-// export const randomTour:Tour = {
-//   name: randomTourName(40),
-//   duration: faker.number.int({min:10, max:40}),
-//   description: faker.lorem.words(5),
-//   maxGroupSize: faker.number.int({min: 10, max: 30}),
-//   summary: faker.lorem.words(10),
-//   difficulty: ,
-//   price: faker.number.int(),
-//   rating: faker.number.float({min:1.0, max:5.0}),
-//   imageCover: `tour-${faker.number.int({min:1,max:9})}-cover.jpg`,
-//   ratingsAverage: faker.number.float({min:1.0, max:5.0}),
-//   guides: object,
-//   startDates: [x:string],
-//   location: {
-//     latitude: number,
-//     longitude: number,
-//     description: string,
-//     address: string,
-//   },
-//   startLocation: {
-//     type: string,
-//     coordinates: number,
-//   }
-// }
+const User = require('../../tourProjectNode/models/userModel.js');
+
+const uri = 'mongodb+srv://sanchous:rV5a4uYtAgF481vC@cluster0.k8kh5hx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+
+mongoose.connect(uri)
+
+async function getRandomUser() {
+  try {
+    const users = await User.aggregate([{ $sample: { size: 1 } }]);
+    
+    if (!users || users.length === 0) {
+      throw new Error('No users found');
+    }
+
+    const randomUser = users[0];
+    const userData = {
+      _id: randomUser._id,
+    };
+    
+    return userData._id;
+  } catch (error) {
+    throw new Error(`Error getting random user: ${error.message}`);
+  }
+}
+function randomDifficulty(){
+  const diff = ['Easy', 'Medium', 'Hard']
+  return diff[faker.number.int({min:0,max:2})]
+}
+const randomDate = faker.date.past();
+const dateWithoutTime = randomDate.toISOString().split('T')[0];
+
+const [date] = [dateWithoutTime];
+
+export const randomTour:Tour = {
+  name: randomTourName(40),
+  duration: faker.number.int({min:10, max:40}),
+  description: faker.lorem.words(5),
+  maxGroupSize: faker.number.int({min: 10, max: 30}),
+  summary: faker.lorem.words(10),
+  difficulty: randomDifficulty(),
+  price: faker.number.int(),
+  rating: faker.number.float({min:1.0, max:5.0}),
+  imageCover: `tour-${faker.number.int({min:1,max:9})}-cover.jpg`,
+  ratingsAverage: faker.number.float({min:1.0, max:5.0}),
+  guides: getRandomUser(),
+  startDates: [date],
+  location: {
+    latitude: faker.location.latitude(),
+    longitude: faker.location.longitude(),
+    description: faker.lorem.sentence(),
+    address: faker.location.streetAddress({ useFullAddress: true }),
+  },
+  startLocation: {
+    type: 'Point',
+    coordinates: [
+      faker.location.longitude(),
+      faker.location.latitude()
+    ],
+  }
+}
 
 
 export function upload(files: string[]): Promise<any> {

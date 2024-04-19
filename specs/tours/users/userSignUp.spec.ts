@@ -4,7 +4,7 @@ import {User} from '../../../data/interface'
 const request = supertest('localhost:8001/api/v1');
 
 describe('USER SIGN UP', () => {
-    describe('POSITIVE TESTING', () => {
+    describe.only('POSITIVE TESTING', () => {
         it('create new user',async () => {
             const data:User = {
                 email: "qw@gmail.com",
@@ -37,7 +37,7 @@ describe('USER SIGN UP', () => {
             
         });
     });
-    describe.only('NEGATIVE TESTING', () => {
+    describe('NEGATIVE TESTING', () => {
         it('should not create new user with the same email',async () => {
             await request
                 .post('/users/signup')
