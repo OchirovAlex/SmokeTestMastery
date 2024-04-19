@@ -33,30 +33,30 @@ const randomTourName = (charCount: number): string => {
 };
 
 
-const User = require('../../tourProjectNode/models/userModel.js');
+// const User = require('../../tourProjectNode/models/userModel.js');
 
-const uri = 'mongodb+srv://sanchous:rV5a4uYtAgF481vC@cluster0.k8kh5hx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
+// const uri = 'mongodb+srv://sanchous:rV5a4uYtAgF481vC@cluster0.k8kh5hx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
 
-mongoose.connect(uri)
+// mongoose.connect(uri)
 
-async function getRandomUser() {
-  try {
-    const users = await User.aggregate([{ $sample: { size: 1 } }]);
+// async function getRandomUser() {
+//   try {
+//     const users = await User.aggregate([{ $sample: { size: 1 } }]);
     
-    if (!users || users.length === 0) {
-      throw new Error('No users found');
-    }
+//     if (!users || users.length === 0) {
+//       throw new Error('No users found');
+//     }
 
-    const randomUser = users[0];
-    const userData = {
-      _id: randomUser._id,
-    };
+//     const randomUser = users[0];
+//     const userData = {
+//       _id: randomUser._id,
+//     };
     
-    return userData._id;
-  } catch (error) {
-    throw new Error(`Error getting random user: ${error.message}`);
-  }
-}
+//     return userData._id;
+//   } catch (error) {
+//     throw new Error(`Error getting random user: ${error.message}`);
+//   }
+// }
 function randomDifficulty(){
   const diff = ['Easy', 'Medium', 'Hard']
   return diff[faker.number.int({min:0,max:2})]
@@ -77,7 +77,7 @@ export const randomTour:Tour = {
   rating: faker.number.float({min:1.0, max:5.0}),
   imageCover: `tour-${faker.number.int({min:1,max:9})}-cover.jpg`,
   ratingsAverage: faker.number.float({min:1.0, max:5.0}),
-  guides: getRandomUser(),
+  //guides: getRandomUser(),
   startDates: [date],
   location: {
     latitude: faker.location.latitude(),
