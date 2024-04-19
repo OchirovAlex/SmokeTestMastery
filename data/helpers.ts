@@ -77,7 +77,7 @@ export const randomTour:Tour = {
   rating: faker.number.float({min:1.0, max:5.0}),
   imageCover: `tour-${faker.number.int({min:1,max:9})}-cover.jpg`,
   ratingsAverage: faker.number.float({min:1.0, max:5.0}),
-  //guides: getRandomUser(),
+  guides: {123: 123},//getRandomUser(),
   startDates: [date],
   location: {
     latitude: faker.location.latitude(),
