@@ -2,6 +2,19 @@ import { faker } from '@faker-js/faker';
 import {User} from './interface'
 
 let password = createRandomUser().password
+
+
+export function getUser(){
+    const password = createRandomUser().password
+    const randomUser = createRandomUser();
+    
+    return {
+        name:randomUser.username,
+        password:password,
+        email: createRandomUser().email.toLowerCase(),
+        passwordConfirm: password
+    }
+}
 export const user = {
     email: createRandomUser().email.toLowerCase(),
     password: password,
