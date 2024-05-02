@@ -19,10 +19,10 @@ describe("TOUR", () => {
       await request
       .post("/tours")
       .set("Cookie", cookie)
-      .send(randomTour)
+      .send(await randomTour())
       .expect(201)
       .then(res=>{
-        console.log(res.body)
+        console.log(res)
       });
     });
   });
