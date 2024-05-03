@@ -86,8 +86,6 @@ describe('POSTS', () => {
         const data = {
             title:"zxc"
         }
-        // const getRes = await request.get('posts/1');
-        // const beforeTitle = getRes.body.title;
         request
         .patch('/posts/1')
         .send(data)
